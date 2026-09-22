@@ -83,11 +83,12 @@ The model follows a **Galaxy schema**: multiple fact tables (transactional/event
 - `DimCustomer` (1) → (*) `FactDetailedOrders` (and `FactReturns`, where a customer is recorded) — links customer contact info
 - `DimOrders` (1) → (*) `FactDetailedOrders`, `FactReturns` — shared order code lookup
 
-This design lets `Gross Overview`, `Net Overview`, and `Returns` all slice by the same shared dimensions (Item, Month, Salesperson) without duplicating logic.
+###Model Preview
+![Modeling](screenshots/DataModel.PNG)
 
 ---
 
-## 🧹 Normalization: From Raw Sheet to Star Schema
+## 🧹 Normalization: From Raw Sheet to Galaxy Schema
 
 ### The raw source (`TablePreview`)
 The original data arrived as a **single flat spreadsheet** — one wide table where every order line repeated all of its context in every row:
