@@ -21,6 +21,7 @@ The report has 4 pages, navigable from the left-hand menu (or buttons on the Hom
 
 ### 1️⃣ Home Page
 Cover/landing page with the Kitty logo and navigation buttons to the 3 analytical pages.
+![Home Page](screenshots/HomePage.PNG)
 
 ### 2️⃣ Gross Overview
 Sales performance **before** deducting returns — i.e., everything sold, regardless of what came back later.
@@ -30,12 +31,14 @@ Sales performance **before** deducting returns — i.e., everything sold, regard
 - **Total Revenue by Salesperson** (pie chart) — split across 3 salespeople (اسماء, نرمين, sales_1)
 - **Total Revenue Per Item** (bar chart) — best-selling items by revenue
 - **Total Qty Per Item** (bar chart) — best-selling items by quantity
+![Gross Overview](screenshots/GrossOverview.PNG)
 
 ### 3️⃣ Net Overview
 Sales performance **after** deducting returns — the true, realized business result.
 - **KPI cards:** Net Sales ($81.2K), Net Sold Qty (1,161), Net Completed Orders (244), Operational Losses ($2.21K), Positive Adjustment ($1.17K)
 - Same visual layout as Gross Overview (Net Sales by Month, Top 5 Customers by Net Sales, Net Sales by Salesperson, Net Sales Per Item, Net Sold Qty Per Item) — but recalculated after removing returned orders
 - Comparing Gross vs. Net side-by-side shows the actual cost of returns: **$87.86K → $81.2K** (~7.5% shrinkage)
+![Net Overview](screenshots/NetOverview.PNG)
 
 ### 4️⃣ Returns
 A dedicated breakdown of everything that came back.
@@ -44,12 +47,13 @@ A dedicated breakdown of everything that came back.
 - **Returned Orders Per Shipping Company** (bar chart) — isolates which fulfillment partner has the most returns (e.g., `3lsare3`: 18 orders)
 - **Returned Orders by Salesperson** (pie chart)
 - **Returns Value Per Item** / **Returned Qty Per Item** (bar charts) — identifies which products are returned most, useful for quality/fit investigation
+![Returns](screenshots/Returns.PNG)
 
 ---
 
 ## 🧩 Data Model
 
-The model follows a **star schema**: multiple fact tables (transactional/event data) surrounded by shared dimension tables (descriptive/lookup data).
+The model follows a **Galaxy schema**: multiple fact tables (transactional/event data) surrounded by shared dimension tables (descriptive/lookup data).
 
 ### Fact Tables
 
@@ -144,22 +148,4 @@ This is a classic **denormalized (0NF/1NF-violating) structure**: the same shipp
 | `TablePreview.pdf` | Sample of the original raw (denormalized) order sheet before modeling |
 | `README.md` | This file |
 
-*(Add the `.pbix` source file and any `.pbit`/data-source connection files to this repo for others to open and refresh the report.)*
 
----
-
-## 🚀 Getting Started
-
-1. Clone this repository.
-2. Open the `.pbix` file in Power BI Desktop.
-3. Refresh data source connections under **Transform Data** (Power Query).
-4. Use the **Item**, **Month**, and **Salesperson** slicers to filter any page; use **Clear All Filter** to reset.
-5. Navigate between **Gross Overview → Net Overview → Returns** to compare total sales, realized sales, and returns side by side.
-
----
-
-## 📌 Notes
-
-- "Gross" figures represent total activity before returns; "Net" figures subtract returns; the "Returns" page isolates that deduction — the three pages are designed to reconcile: `Gross − Returns ≈ Net`.
-- Operational Losses and Positive Adjustment cards appear identical across all three pages by design, since they're tracked independently of the Gross/Net/Returns split.
-- Some raw fields in `TablePreview` (e.g., free-text notes) were intentionally excluded from the model since they don't fit a measure or a clean dimension attribute.
